@@ -7,7 +7,7 @@ import { Charts } from './Chart';
 import axios from 'axios';
 const apiURL = {
   base: "https://api.openweathermap.org/data/2.5/",
-  key: "b8f842ce374ff45524b0d69071e2f70b",
+  key: process.env.REACT_APP_WEATHER_API,
 };
 export const Weather = () => {
    const [searchBarInput, setSearchBarInput] = React.useState("Nigeria");
@@ -19,6 +19,7 @@ export const Weather = () => {
       `${apiURL.base}weather?q=${searchBarInput}&appid=${apiURL.key}&units=metric`
     );
     setWeather(response.data);
+    setUserSearchString(searchBarInput);
   };
    
 

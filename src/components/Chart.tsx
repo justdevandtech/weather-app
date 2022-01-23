@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Line } from "react-chartjs-2";
 import axios from 'axios';
+import { Loading } from './Loading';
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
@@ -8,12 +9,13 @@ Chart.register(...registerables);
 //daily forecast api
 const apiURL = {
     base: "https://api.openweathermap.org/data/2.5/",
-    key: "b8f842ce374ff45524b0d69071e2f70b",
+    key: process.env.REACT_APP_WEATHER_API,
 };
-//api.openweathermap.org/data/2.5/forecast?q=nigeria&appid=b8f842ce374ff45524b0d69071e2f70b
+//api.openweathermap.org/data/2.5/forecast?q=nigeria&appid={API_KEY}
 
 export const Charts = ({ userSearchString }: any) => {
   const [weather, setWeather] = React.useState<any>([{}]);
+    const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     axios
@@ -22,6 +24,7 @@ export const Charts = ({ userSearchString }: any) => {
       )
       .then(res => {
         setWeather(res.data);
+        setLoading(false);
       });
   }, [userSearchString]);
 
@@ -38,7 +41,7 @@ export const Charts = ({ userSearchString }: any) => {
     labels: chartLabels,
     datasets: [
       {
-        label: `Daily Forecast - ${userSearchString}`,
+        label: "Daily Forecast",
         data: chartData,
         fill: true,
         borderColor: "rgb(75, 192, 192)",
@@ -47,6 +50,10 @@ export const Charts = ({ userSearchString }: any) => {
       },
     ],
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className='w-100'>
