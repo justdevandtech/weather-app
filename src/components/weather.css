@@ -1,0 +1,7 @@
+* {
+background-color: #ffffff;
+}
+.weather {
+    border: 1px solid #ccc;
+    height: 60%;
+}
