@@ -2,6 +2,9 @@
 
 This project was built using TypeScrript, React, CSS(Bootstrap), and openweather API
 
+
+App hosted on netlify.com - see live version - https://myopenweather.netlify.app/
+
 ## Available Scripts
 
 In the project directory, you can run:
