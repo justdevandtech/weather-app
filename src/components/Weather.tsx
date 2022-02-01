@@ -9,33 +9,36 @@ const apiURL = {
   base: "https://api.openweathermap.org/data/2.5/",
   key: process.env.REACT_APP_WEATHER_API,
 };
-export const Weather = () => {
-   const [searchBarInput, setSearchBarInput] = React.useState("Nigeria");
-   const [userSearchString, setUserSearchString] = React.useState('');
-   const [weather, setWeather] = React.useState({});
+  
 
-   const fetchData = async () => {
+export const Weather = () => {
+  const [searchBarInput, setSearchBarInput] = React.useState("Nigeria");
+  const [userSearchString, setUserSearchString] = React.useState("");
+  const [weather, setWeather] = React.useState({});
+
+  //api to automatically get the current location
+  const fetchData = async () => {
+    try {
     const response = await axios.get(
       `${apiURL.base}weather?q=${searchBarInput}&appid=${apiURL.key}&units=metric`
     );
-    setWeather(response.data);
+    setWeather(response?.data);
     setUserSearchString(searchBarInput);
+  }
+  catch (error) {
+    console.log(error);
+  }
   };
-   
 
   useEffect(() => {
     fetchData();
   }, []);
 
-   
   const handleSearchBarInput = () => {
     fetchData();
     setUserSearchString(searchBarInput);
-  }
+  };
 
-  console.log(weather);
-  
-  
   return (
     <div className='weather bg-white p-4 shadow rounded mt-4'>
       <InputGroup className='mb-3'>
@@ -62,13 +65,10 @@ export const Weather = () => {
       <Row>
         <Col style={{ borderRight: "3px solid #f5f5f5" }}>
           <DisplayDate />
-          <p>{}</p>
           <WeatherLeftSidePanel weatherData={weather} />
         </Col>
         <Col>
-          <Charts
-            userSearchString={userSearchString}
-          />
+          <Charts userSearchString={userSearchString} />
         </Col>
       </Row>
     </div>

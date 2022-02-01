@@ -8,7 +8,6 @@ import cloudImage from "../assest/svg/cloud.svg";
  };
 
 export const WeatherLeftSidePanel = ({ weatherData }: searchProps) => {
-  console.log(weatherData);
   const { main, wind, weather, name } = weatherData;
 
   if (Object.keys(weatherData).length === 0) {

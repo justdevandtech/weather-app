@@ -1,0 +1,6 @@
+
+
+.cardButton {
+    display: grid;
+    grid-template-columns: repeat(max-content, minmax(0, 1fr));
+}

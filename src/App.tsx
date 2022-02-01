@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="app">
       <h1 className='text-center'>Weather App</h1>
-      <Container>
+      <Container fluid>
       <Weather />
       </Container>
     </div>
